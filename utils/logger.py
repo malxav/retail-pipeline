@@ -18,8 +18,7 @@ def get_logger(name: str) -> logging.Logger:
         from utils.logger import get_logger
         logger = get_logger(__name__)
 
-    Using __name__ means the log entry shows exactly which module
-    fired it — invaluable when debugging a multi-file pipeline.
+    Uses __name__ means the log entry shows exactly which module used it.
     """
     logger = logging.getLogger(name)
 
