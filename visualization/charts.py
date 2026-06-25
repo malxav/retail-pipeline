@@ -1,4 +1,11 @@
-# visualisation/charts.py
+"""
+Data visualization and reporting engine for customer analytics.
+
+This module generates diagnostic plots and stakeholder charts, converting raw 
+RFM metrics into clear visual trends, heatmaps, and distribution maps that 
+validate the customer segmentation models.
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
@@ -112,7 +119,9 @@ def plot_monetary_distribution(rfm: pd.DataFrame) -> None:
         x='Segment',
         y='Monetary',
         order=order,
+        hue='Segment',
         palette=PALETTE,
+        legend=False,
         ax=ax,
         flierprops={'marker': 'o', 'markersize': 3, 'alpha': 0.3}
     )
@@ -158,7 +167,7 @@ def plot_recency_frequency_scatter(rfm: pd.DataFrame) -> None:
     _save(fig, 'recency_frequency_scatter.png')
 
 
-def run_visualisation_pipeline(rfm: pd.DataFrame) -> None:
+def run_visualization_pipeline(rfm: pd.DataFrame) -> None:
     # Generates all charts.
     logger.info('Generating visualisations')
     plot_segment_distribution(rfm)

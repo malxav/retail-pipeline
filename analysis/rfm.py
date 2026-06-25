@@ -25,7 +25,7 @@ def compute_rfm_base(df: pd.DataFrame) -> pd.DataFrame:
     This is the most important aggregation in the project. We go from
     392,690 rows (one per line item) to one row per customer.
 
-    Three decisions worth understanding:
+    Three decisions worth understanding here are:
     1. Recency uses max(InvoiceDate) - most recent purchase, not first
     2. Frequency uses nunique(InvoiceNo) - distinct orders, not line items (aggregate to invoice-level)
     3. Monetary uses sum(LineRevenue) - total spend, not average order value
@@ -78,29 +78,23 @@ def score_rfm(rfm: pd.DataFrame) -> pd.DataFrame:
     """
     logger.info(f'Scoring RFM using {RFM_BINS} quantile bins')
 
-    rfm['R_Score'] = pd.qcut(
-        rfm['Recency'],
-        q=RFM_BINS,
-        labels=[5, 4, 3, 2, 1],   # inverse: low recency days = high score
-        duplicates='drop'
-    ).astype(int)
+    # 1. Recency: High days = Low score (Needs to be inverted)
+    # We use labels=False, then invert the resulting integers
+    r_bins = pd.qcut(rfm['Recency'], q=RFM_BINS, duplicates='drop', labels=False)
+    rfm['R_Score'] = (RFM_BINS - 1) - r_bins + 1  # Inverts the 0-indexed bins and adds 1
 
-    rfm['F_Score'] = pd.qcut(
-        rfm['Frequency'],
-        q=RFM_BINS,
-        labels=[1, 2, 3, 4, 5],
-        duplicates='drop'
-    ).astype(int)
+    # 2. Frequency: Low orders = Low score
+    rfm['F_Score'] = pd.qcut(rfm['Frequency'], q=RFM_BINS, duplicates='drop', labels=False) + 1
 
-    rfm['M_Score'] = pd.qcut(
-        rfm['Monetary'],
-        q=RFM_BINS,
-        labels=[1, 2, 3, 4, 5],
-        duplicates='drop'
-    ).astype(int)
+    # 3. Monetary: Low spend = Low score
+    rfm['M_Score'] = pd.qcut(rfm['Monetary'], q=RFM_BINS, duplicates='drop', labels=False) + 1
+
+    # Force everything to integer type just to be safe
+    rfm['R_Score'] = rfm['R_Score'].astype(int)
+    rfm['F_Score'] = rfm['F_Score'].astype(int)
+    rfm['M_Score'] = rfm['M_Score'].astype(int)
 
     # Composite RFM score (e.g. '555', '312')
-    # Used for segment lookup
     rfm['RFM_Score'] = (
         rfm['R_Score'].astype(str) +
         rfm['F_Score'].astype(str) +
