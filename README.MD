@@ -18,7 +18,7 @@ The result is not a static report. It is a pipeline. Drop in a new data file, ru
 
 ### More than half the customer base has gone quiet
 
-Of 4,337 customers, \*\*2,297 (53%)\*\* fall into the Hibernating, About to Sleep, or Lost categories. These are customers who have bought before but are no longer engaged. For a subscription or repeat-purchase business, this is the most important number on the dashboard. It means the majority of people who have ever trusted this retailer with their money are no longer coming back.
+Of 4,337 customers, **2,297 (53%)** fall into the Hibernating, About to Sleep, or Lost categories. These are customers who have bought before but are no longer engaged. For a subscription or repeat-purchase business, this is the most important number on the dashboard. It means the majority of people who have ever trusted this retailer with their money are no longer coming back.
 
 ### A small group of Champions is carrying disproportionate weight
 
@@ -42,17 +42,24 @@ With 4,337 identifiable customers generating over £9.7M in revenue across the d
 
 The report is structured across four distinct pages:
 
-| Page | Question Answered | Description \& Visual Approach |
-
+| Page | Question Answered | Description & Visual Approach |
 | :--- | :--- | :--- |
-
 | **1. Customer Health Overview** | What is the overall health of our customer base right now? | High-level macro trends utilizing a custom Deneb Treemap. |
-
 | **2. Segment Deep Dive** | What does each segment look like and what should we do about it? | Behavioral matrix mapping via a layered 5x5 RFM heatmap. |
-
 | **3. Customer Explorer** | Who specifically are our most and least valuable customers? | Granular scatter plot with conditional labeling for high-value targets. |
-
 | **4. Revenue Analysis** | Where does revenue come from and how is it trending? | Relative growth momentum tracked via an indexed dual-trend chart. |
+
+<img width="1311" height="736" alt="Image" src="https://github.com/user-attachments/assets/3b2cc29d-6a39-4942-afe0-f482081ddaae" />
+<p align="center"><i>Figure 1: Customer Health Overview report page.</i></p>
+
+<img width="1313" height="737" alt="Image" src="https://github.com/user-attachments/assets/8726afe8-ef4b-47ef-92f4-163eb40c5378" />
+<p align="center"><i>Figure 2: Segment Deep Dive report page.</i></p>
+
+<img width="1312" height="735" alt="Image" src="https://github.com/user-attachments/assets/47137414-ce56-4a56-bec5-1cbc0fb47eba" />
+<p align="center"><i>Figure 3: Customer Explorer report page.</i></p>
+
+<img width="1312" height="735" alt="Image" src="https://github.com/user-attachments/assets/89c2a90f-9c55-4315-a6f6-ebd43febbbec" />
+<p align="center"><i>Figure 4: Revenue Analysis report page.</i></p>
 
 ---
 
