@@ -123,27 +123,27 @@ The composite RFM score uses a weighted combination (R × 0.4 + F × 0.35 + M ×
 
 Segment assignment uses R and F scores only as the primary axes. Monetary correlates strongly with frequency. Adding it as a third segmentation axis increases complexity without meaningfully changing the strategic recommendation per segment.
 
-### Why Deneb — Visual Design Decisions
+### Why Deneb? Visual Design Decisions
 
 Three of the four pages use Deneb (Vega / Vega-Lite) custom visuals rather than Power BI native visuals. Besides practice, each decision was made on specific grounds, not just aesthetic preference:
 
-**Treemap (Page 1) — Vega with `nest` transform**
+**Treemap (Page 1) - Vega with `nest` transform**
 
 Power BI's native treemap cannot apply per-segment color control against an exact palette. It also cannot render two lines of text inside tiles with conditional visibility based on tile dimensions. The nest transform was chosen over stratify because the data is flat. Stratify requires a synthetic root node for hierarchical data structures, which adds unnecessary complexity for a single-level grouping.
 
-**RFM Matrix (Page 2) — Vega-Lite layered spec**
+**RFM Matrix (Page 2) - Vega-Lite layered spec**
 
 A 5×5 heatmap with customer count and segment name in each cell. The native Matrix visual cannot render both a color fill and text overlay simultaneously in the same cell. Three Vega-Lite layers solve this cleanly. Conditional text color preserves readability across the full color scale.
 
-**Customer Scatter Plot (Page 3) — Vega-Lite**
+**Customer Scatter Plot (Page 3) - Vega-Lite**
 
 Chosen over native scatter for two reasons. The first is per-segment opacity control (0.55) to handle overplotting across 4,337 points. The second is a conditional label layer that surfaces only Champions and Cannot Lose Them customers above the £8,000 monetary threshold, making the chart actionable by name rather than anonymous.
 
-**Indexed Dual Trend (Page 4) — Vega-Lite with `fold` and `window`**
+**Indexed Dual Trend (Page 4) - Vega-Lite with `fold` and `window`**
 
 Power BI's native dual-axis line chart uses separate Y scales for each series, making visual comparison between Revenue and Order Volume misleading. Indexing both series to base 100 at the first observation (using a window first\_value transform) normalizes them to the same scale. The fold function then melts the two index columns into a single series field. This enables one mark to render both lines via color encoding rather than requiring two separate layer definitions.
 
-\### Project Structure
+### Project Structure
 
 ```
 retail_pipeline/
@@ -195,7 +195,7 @@ retail_pipeline/
 git clone https://github.com/malxav/retail_pipeline
 cd retail\pipeline
 python -m venv venv
-venv\\Scripts\\activate
+venv\Scripts\activate
 pip install -r requirements.txt
 
 # Configure database connection
